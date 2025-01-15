@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
 import { getOrder, getOrders, getSellerOrders, placeOrder, updateOrder, updateProductsStock, updateUserOrders } from './services/orders.mjs';
-
+import cors from 'cors'
 dotenv.config();
 
 const app = express();
@@ -23,6 +23,7 @@ mongoose.connect(process.env.MONGO_URI_ORDERS).then(
 );
 
 app.use(express.json());
+app.use(cors())
 
 
 app.post('/api/placeOrder', async (req, res) => {
