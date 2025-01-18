@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import communicator from "../communicator/index.mjs";
 import OrdersModel from "../model/ordersSchema.mjs";
 
@@ -62,7 +63,8 @@ async function getOrder(order_id){
 
 async function getSellerOrders(seller_id){
     try {
-        const orders = await OrdersModel.find({'items.seller_id': seller_id});
+        const seller = new mongoose.Types.ObjectId(seller_id);
+        const orders = await OrdersModel.find({'items.seller_id': seller});
         return orders;
     } catch (error) {
         throw error
